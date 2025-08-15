@@ -1,0 +1,3 @@
+Nome | Email | Tipo | Empresa | Cadastrar | Ver Arquivo | Ver XML
+---------------------------------------------------------------
+Admin | admin@app.com | Escritorio |  | Sim | Sim | Sim

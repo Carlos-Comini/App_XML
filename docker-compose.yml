@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  streamlit:
+    image: streamlit/streamlit:latest
+    container_name: projeto_alencar_streamlit
+    volumes:
+      - ./usuarios.db:/mount/src/projeto_alencar/usuarios.db
+      - ./empresas.db:/mount/src/projeto_alencar/empresas.db
+      - ./:/mount/src/projeto_alencar
+    ports:
+      - "8501:8501"
+    working_dir: /mount/src/projeto_alencar
+    command: streamlit run app.py

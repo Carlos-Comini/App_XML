@@ -1,0 +1,90 @@
+<CompNfse xmlns="http://www.abrasf.org.br/nfse.xsd">
+	<Nfse versao="1.00">
+		<InfNfse Id="">
+			<Numero>3929619</Numero>
+			<CodigoVerificacao>2MEHMZJIJ</CodigoVerificacao>
+			<DataEmissao>2025-07-14T16:48:09</DataEmissao>
+			<ValoresNfse>
+				<BaseCalculo>5904.46</BaseCalculo>
+				<Aliquota>2.0000</Aliquota>
+				<ValorIss>118.09</ValorIss>
+				<ValorLiquidoNfse>5904.46</ValorLiquidoNfse>
+			</ValoresNfse>
+			<PrestadorServico>
+				<IdentificacaoPrestador>
+					<CpfCnpj>
+						<Cnpj>00910509001305</Cnpj>
+					</CpfCnpj>
+					<InscricaoMunicipal>48563</InscricaoMunicipal>
+				</IdentificacaoPrestador>
+				<RazaoSocial>THOMSON REUTERS BRASIL CONTEUDO E TECNOLOGIA LTDA</RazaoSocial>
+				<NomeFantasia />
+				<Endereco>
+					<Endereco>RUA DOS IPES</Endereco>
+					<Numero>990E</Numero>
+					<Bairro>JD MATO GROSSO</Bairro>
+					<CodigoMunicipio>5103304</CodigoMunicipio>
+					<CodigoPais>1058</CodigoPais>
+					<Cep>78310000</Cep>
+				</Endereco>
+				<Contato>
+					<Telefone>6532832222</Telefone>
+					<Email>eliane@alencarassociados.com.br</Email>
+				</Contato>
+			</PrestadorServico>
+			<OrgaoGerador>
+				<CodigoMunicipio>5103304</CodigoMunicipio>
+				<Uf>MT</Uf>
+			</OrgaoGerador>
+			<DeclaracaoPrestacaoServico>
+				<InfDeclaracaoPrestacaoServico>
+					<Competencia>2025-07-14</Competencia>
+					<Servico>
+						<Valores>
+							<ValorServicos>5904.46</ValorServicos>
+							<ValorIss>118.09</ValorIss>
+							<Aliquota>2.0000</Aliquota>
+						</Valores>
+						<IssRetido>2</IssRetido>
+						<ItemListaServico>0103</ItemListaServico>
+						<Discriminacao>{[[Descricao=Dominio Processos conf. contrato(s): 504431 comp.: 7/2025.][ItemServico=0103][Quantidade=1][ValorUnitario=552.58][ValorServico=552.58][ValorBaseCalculo=552.58][Aliquota=2][Deducoes=0][DescontoCondicionado=0][DescontoIncondicionado=0]][[Descricao=Dominio WEB 2.0 conf. contrato(s): 504435 comp.: 7/2025.][ItemServico=0103][Quantidade=1][ValorUnitario=1674.57][ValorServico=1674.57][ValorBaseCalculo=1674.57][Aliquota=2][Deducoes=0][DescontoCondicionado=0][DescontoIncondicionado=0]][[Descricao=Dominio Messenger conf. contrato(s): 504433 comp.: 7/2025.][ItemServico=0103][Quantidade=1][ValorUnitario=581.77][ValorServico=581.77][ValorBaseCalculo=581.77][Aliquota=2][Deducoes=0][DescontoCondicionado=0][DescontoIncondicionado=0]][[Descricao=Dominio Premium conf. contrato(s): 504437 comp.: 7/2025.][ItemServico=0107][Quantidade=1][ValorUnitario=3095.54][ValorServico=3095.54][ValorBaseCalculo=3095.54][Aliquota=2][Deducoes=0][DescontoCondicionado=0][DescontoIncondicionado=0]]}</Discriminacao>
+						<CodigoMunicipio>4204608</CodigoMunicipio>
+						<CodigoPais>1058</CodigoPais>
+						<ExigibilidadeISS>1</ExigibilidadeISS>
+						<MunicipioIncidencia>4204608</MunicipioIncidencia>
+					</Servico>
+					<Prestador>
+						<CpfCnpj>
+							<Cnpj>00910509001305</Cnpj>
+						</CpfCnpj>
+						<InscricaoMunicipal>48563</InscricaoMunicipal>
+					</Prestador>
+					<Tomador>
+						<IdentificacaoTomador>
+							<CpfCnpj>
+								<Cnpj>06220643000127</Cnpj>
+							</CpfCnpj>
+						</IdentificacaoTomador>
+						<RazaoSocial>ALENCAR CONTABILIDADE LTDA</RazaoSocial>
+						<Endereco>
+							<Endereco> R DOS IPES</Endereco>
+							<Numero>990</Numero>
+							<Complemento>E - N</Complemento>
+							<Bairro>JD MATO GROSSO</Bairro>
+							<CodigoMunicipio>5103304</CodigoMunicipio>
+							<Uf>MT</Uf>
+							<CodigoPais>1058</CodigoPais>
+							<Cep>78310000</Cep>
+						</Endereco>
+						<Contato>
+							<Telefone>65999070633</Telefone>
+							<Email>eliane@alencarassociados.com.br</Email>
+						</Contato>
+					</Tomador>
+					<OptanteSimplesNacional>2</OptanteSimplesNacional>
+					<IncentivoFiscal>0</IncentivoFiscal>
+				</InfDeclaracaoPrestacaoServico>
+			</DeclaracaoPrestacaoServico>
+		</InfNfse>
+	</Nfse>
+</CompNfse>

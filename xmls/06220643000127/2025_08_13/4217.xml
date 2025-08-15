@@ -1,0 +1,92 @@
+<CompNfse xmlns="http://www.abrasf.org.br/nfse.xsd">
+	<Nfse versao="1.00">
+		<InfNfse Id="">
+			<Numero>4217</Numero>
+			<CodigoVerificacao>CIO4D0RY0</CodigoVerificacao>
+			<DataEmissao>2025-07-14T15:59:45</DataEmissao>
+			<ValoresNfse>
+				<BaseCalculo>300.00</BaseCalculo>
+				<Aliquota>3.4000</Aliquota>
+				<ValorLiquidoNfse>300.00</ValorLiquidoNfse>
+			</ValoresNfse>
+			<PrestadorServico>
+				<IdentificacaoPrestador>
+					<CpfCnpj>
+						<Cnpj>06220643000127</Cnpj>
+					</CpfCnpj>
+					<InscricaoMunicipal>488</InscricaoMunicipal>
+				</IdentificacaoPrestador>
+				<RazaoSocial>ALENCAR CONTABILIDADE LTDA</RazaoSocial>
+				<NomeFantasia />
+				<Endereco>
+					<Endereco>RUA DOS IPES</Endereco>
+					<Numero>990E</Numero>
+					<Bairro>JD MATO GROSSO</Bairro>
+					<CodigoMunicipio>5103304</CodigoMunicipio>
+					<CodigoPais>1058</CodigoPais>
+					<Cep>78310000</Cep>
+				</Endereco>
+				<Contato>
+					<Telefone>6532832222</Telefone>
+					<Email>eliane@alencarassociados.com.br</Email>
+				</Contato>
+			</PrestadorServico>
+			<OrgaoGerador>
+				<CodigoMunicipio>5103304</CodigoMunicipio>
+				<Uf>MT</Uf>
+			</OrgaoGerador>
+			<DeclaracaoPrestacaoServico>
+				<InfDeclaracaoPrestacaoServico>
+					<Competencia>2025-07-13</Competencia>
+					<Servico>
+						<Valores>
+							<ValorServicos>300.00</ValorServicos>
+							<Aliquota>3.4000</Aliquota>
+						</Valores>
+						<IssRetido>2</IssRetido>
+						<ItemListaServico>1719</ItemListaServico>
+						<CodigoCnae>6920601</CodigoCnae>
+						<Discriminacao>{[[Descricao=1 Honorarios Contabeis. 300,00
+
+
+ 
+ Trib aprox R$: 40,35 Federal, R$: 0,00 Estadual e R$: 13,86 Municipal Fonte: IBPT/empresometro.com.br   CAF7DD][ItemServico=1719][Quantidade=1][ValorUnitario=300][ValorServico=300][ValorBaseCalculo=300][Aliquota=3.4]]}</Discriminacao>
+						<CodigoMunicipio>5103304</CodigoMunicipio>
+						<CodigoPais>1058</CodigoPais>
+						<ExigibilidadeISS>1</ExigibilidadeISS>
+						<MunicipioIncidencia>5103304</MunicipioIncidencia>
+					</Servico>
+					<Prestador>
+						<CpfCnpj>
+							<Cnpj>06220643000127</Cnpj>
+						</CpfCnpj>
+						<InscricaoMunicipal>488</InscricaoMunicipal>
+					</Prestador>
+					<Tomador>
+						<IdentificacaoTomador>
+							<CpfCnpj>
+								<Cnpj>38205367000114</Cnpj>
+							</CpfCnpj>
+						</IdentificacaoTomador>
+						<RazaoSocial>GUAPORE SERVICOS DE VISTORIAS VEICULAR LTDA</RazaoSocial>
+						<Endereco>
+							<Endereco> PREFEITO VALDIR MASUTTI</Endereco>
+							<Numero>0</Numero>
+							<Bairro>CENTRO</Bairro>
+							<CodigoMunicipio>5103304</CodigoMunicipio>
+							<Uf>MT</Uf>
+							<CodigoPais>1058</CodigoPais>
+							<Cep>78310000</Cep>
+						</Endereco>
+						<Contato>
+							<Telefone>6599101370</Telefone>
+							<Email>PRATIKACOMODORO@GMAIL.COM</Email>
+						</Contato>
+					</Tomador>
+					<OptanteSimplesNacional>1</OptanteSimplesNacional>
+					<IncentivoFiscal>0</IncentivoFiscal>
+				</InfDeclaracaoPrestacaoServico>
+			</DeclaracaoPrestacaoServico>
+		</InfNfse>
+	</Nfse>
+</CompNfse>

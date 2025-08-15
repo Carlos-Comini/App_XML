@@ -1,0 +1,13 @@
+credentials:
+  usernames:
+    admin:
+      email: admin@admin.com
+      name: Admin
+      password: '123456' # Use stauth.Hasher(['123456']).generate() para hash seguro
+cookie:
+  expiry_days: 30
+  key: 'random_signature_key'
+  name: 'streamlit_auth'
+preauthorized:
+  emails:
+    - admin@admin.com

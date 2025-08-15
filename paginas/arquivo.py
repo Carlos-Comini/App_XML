@@ -1,3 +1,91 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import streamlit as st
+import mimetypes
+from datetime import datetime
+from funcoes_compartilhadas.google_drive import enviar_com_subpastas
+from funcoes_compartilhadas.empresas_sql import listar_empresas, buscar_empresa_por_cnpj
+from funcoes_compartilhadas.documentos_sql import registrar_documento, listar_documentos, deletar_documento
+import os
+
+# ID da pasta raiz no Google Drive para ARQUIVOS comuns
+PASTA_RAIZ_ARQUIVOS = "1V7qAWb8MpoX6fV9LVB0Cq8ovlogEanmt"
+
+def normaliza_cnpj(cnpj):
+    if not cnpj:
+        return ''
+    return ''.join(filter(str.isdigit, cnpj))
+
+def exibir():
+    st.title("📂 Gestão de Arquivos")
+    st.subheader("📤 Enviar arquivo manualmente")
+
+    empresas_cadastradas = listar_empresas()
+    opcoes_empresas = [f"{e['razao_social']} ({e['cnpj']})" for e in empresas_cadastradas]
+    empresa_sel = st.selectbox("Selecione a empresa", opcoes_empresas)
+    empresa_info = None
+    if empresa_sel:
+        cnpj_sel = empresa_sel.split("(")[-1].replace(")", "").strip()
+        empresa_info = buscar_empresa_por_cnpj(normaliza_cnpj(cnpj_sel))
+
+    uploaded = st.file_uploader("Escolha um ou mais arquivos", accept_multiple_files=True)
+
+    if uploaded and empresa_info:
+        for file in uploaded:
+            nome_final = file.name
+            hoje = datetime.today()
+            ano = str(hoje.year)
+            mes = f"{hoje.month:02d}"
+
+            # Salva temporariamente para upload
+            caminho_temp = f"/tmp/{nome_final}"
+            with open(caminho_temp, "wb") as f:
+                f.write(file.read())
+
+            # Subpastas: Razão Social / Ano / Mês
+            subpastas = [empresa_info["razao_social"], ano, mes]
+            link_drive = enviar_com_subpastas(
+                caminho_temp, nome_final, PASTA_RAIZ_ARQUIVOS, subpastas
+            )
+
+            # Registra no banco
+            info_doc = {
+                "nome": nome_final,
+                "caminho": link_drive,  # Agora link do Drive
+                "empresa": empresa_info["razao_social"],
+                "cnpj": normaliza_cnpj(empresa_info["cnpj"]),
+                "banco": "ARQUIVOS",
+                "ano": ano,
+                "mes": mes,
+                "tipo": mimetypes.guess_type(nome_final)[0] or "desconhecido",
+                "data_upload": hoje.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            sucesso = registrar_documento(info_doc)
+            if sucesso:
+                st.success(f"Arquivo '{nome_final}' enviado para o Google Drive com sucesso!")
+            else:
+                st.warning(f"Arquivo '{nome_final}' já existe para essa empresa e período.")
+
+    st.subheader("📁 Arquivos Recebidos")
+    documentos = listar_documentos()
+    empresas = sorted(set(d["empresa"] for d in documentos if d["banco"] == "ARQUIVOS"))
+    filtro = st.selectbox("Filtrar por empresa", ["Todas"] + empresas)
+    docs_filtrados = [d for d in documentos if d["banco"] == "ARQUIVOS"]
+    if filtro != "Todas":
+        docs_filtrados = [d for d in docs_filtrados if d["empresa"] == filtro]
+
+    if docs_filtrados:
+        for doc in docs_filtrados:
+            with st.expander(f'{doc["nome"]} — {doc["empresa"]} {doc["ano"]}/{doc["mes"]}'):
+                st.write(f"📌 Empresa: {doc['empresa']}")
+                st.write(f"📅 Ano/Mês: {doc['ano']}/{doc['mes']}")
+                st.markdown(f"[⬇️ Baixar]({doc['caminho']})", unsafe_allow_html=True)
+                if st.button(f"🗑️ Excluir {doc['nome']}", key=f"delarq_{doc['nome']}"):
+                    deletar_documento(doc['id'])
+                    st.success(f"Arquivo '{doc['nome']}' excluído do registro.")
+                    st.rerun()
+    else:
+        st.info("Nenhum arquivo encontrado.")
 
 
 from funcoes_compartilhadas.empresas_sql import listar_empresas
@@ -203,7 +291,7 @@ def exibir():
                     except Exception as e:
                         st.error(f"Erro ao excluir: {e}")
 
-    # NOVA SEÇÃO: Visualizar arquivos XML enviados via Contabilina.exe
+    # NOVA SEÇÃO: Visualizar arquivos XML enviados via API
     st.subheader("📑 XMLs enviados via API")
     xmls_base = Path("xmls")
     if not xmls_base.exists():

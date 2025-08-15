@@ -250,8 +250,11 @@ def exibir():
 
             empresa_info = buscar_empresa_por_cnpj(cnpj)
             nome_empresa = empresa_info["razao_social"] if empresa_info else cnpj
-            hoje = datetime.today().strftime("%Y_%m_%d")
-            pasta_destino = XML_BASE / cnpj / hoje
+            hoje = datetime.today()
+            ano = str(hoje.year)
+            mes = f"{hoje.month:02d}"
+            # Nova hierarquia: Razão Social / Entrada ou Saída / Ano / Mês
+            pasta_destino = XML_BASE / nome_empresa / tipo_nota / ano / mes
             pasta_destino.mkdir(parents=True, exist_ok=True)
             caminho = pasta_destino / file.name
             temp_path.replace(caminho)
@@ -272,8 +275,8 @@ def exibir():
                     "empresa": nome_empresa,
                     "cnpj": cnpj,
                     "banco": "XML",
-                    "ano": hoje.split('_')[0],
-                    "mes": hoje.split('_')[1],
+                    "ano": ano,
+                    "mes": mes,
                     "tipo_xml": tipo_xml,
                     "tipo_nota": tipo_nota,
                     "tipo": tipo_xml,

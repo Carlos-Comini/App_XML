@@ -312,8 +312,14 @@ def exibir():
                     st.write(f"📅 Data do Documento: {data_real}")
                 else:
                     st.write(f"📅 Data do Documento: Não disponível")
-                with open(doc["caminho"], "rb") as f:
-                    st.download_button("⬇️ Baixar XML", f, file_name=doc["nome"], key=f"download_{doc['id']}")
+                if os.path.exists(doc["caminho"]):
+                    try:
+                        with open(doc["caminho"], "rb") as f:
+                            st.download_button("⬇️ Baixar XML", f, file_name=doc["nome"], key=f"download_{doc['id']}")
+                    except Exception as e:
+                        st.warning(f"Erro ao abrir o arquivo para download: {e}")
+                else:
+                    st.warning("Arquivo não encontrado no servidor para download.")
                 if st.button(f"🗑️ Excluir XML {doc['id']}", key=f"delxml_{doc['id']}"):
                     if st.session_state.get(f"confirm_delxml_{doc['id']}") != True:
                         st.warning("Tem certeza que deseja excluir este XML?")
@@ -344,3 +350,33 @@ def exibir():
                             st.error(f"Erro ao excluir: {e}\nCaminho do arquivo: {doc['caminho']}")
     else:
         st.info("Nenhum arquivo XML encontrado.")
+
+    # NOVA SEÇÃO: Visualizar arquivos XML enviados via API
+    st.subheader("📑 XMLs enviados via API")
+    xmls_base = Path("xmls")
+    if not xmls_base.exists():
+        st.info("Nenhum XML enviado ainda.")
+        return
+    xmls_encontrados = list(xmls_base.glob("**/*.xml"))
+    if not xmls_encontrados:
+        st.info("Nenhum XML enviado ainda.")
+        return
+    agrupados = {}
+    for xml in xmls_encontrados:
+        partes = xml.parts
+        # Esperado: xmls/CNPJ/DATA/arquivo.xml
+        if len(partes) >= 4:
+            cnpj = partes[1]
+            data = partes[2]
+            agrupados.setdefault((cnpj, data), []).append(xml)
+        else:
+            agrupados.setdefault(("geral", "mês"), []).append(xml)
+    for (cnpj, data), arquivos in sorted(agrupados.items()):
+        with st.expander(f"CNPJ: {cnpj} | Data: {data} ({len(arquivos)} arquivo(s))"):
+            for xml in arquivos:
+                st.write(f"📄 {xml.name}")
+                try:
+                    with open(xml, "rb") as f:
+                        st.download_button("⬇️ Baixar XML", f, file_name=xml.name, key=f"download_xml_{xml}")
+                except Exception as e:
+                    st.warning(f"Erro ao abrir o arquivo para download: {e}")

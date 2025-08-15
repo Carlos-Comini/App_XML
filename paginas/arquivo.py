@@ -291,31 +291,5 @@ def exibir():
                     except Exception as e:
                         st.error(f"Erro ao excluir: {e}")
 
-    # NOVA SEÇÃO: Visualizar arquivos XML enviados via API
-    st.subheader("📑 XMLs enviados via API")
-    xmls_base = Path("xmls")
-    if not xmls_base.exists():
-        st.info("Nenhum XML enviado ainda.")
-        return
-    xmls_encontrados = list(xmls_base.glob("**/*.xml"))
-    if not xmls_encontrados:
-        st.info("Nenhum XML enviado ainda.")
-        return
-    agrupados = {}
-    for xml in xmls_encontrados:
-        partes = xml.parts
-        # Esperado: xmls/CNPJ/DATA/arquivo.xml
-        if len(partes) >= 4:
-            cnpj = partes[1]
-            data = partes[2]
-            agrupados.setdefault((cnpj, data), []).append(xml)
-        else:
-            agrupados.setdefault(("geral", "0000_00_00"), []).append(xml)
-    for (cnpj, data), arquivos in sorted(agrupados.items()):
-        with st.expander(f"CNPJ: {cnpj} | Data: {data} ({len(arquivos)} arquivo(s))"):
-            for xml in arquivos:
-                st.write(f"📄 {xml.name}")
-                with open(xml, "rb") as f:
-                    st.download_button("⬇️ Baixar XML", f, file_name=xml.name, key=f"download_xml_{xml}")
 
 

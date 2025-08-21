@@ -265,8 +265,14 @@ def exibir():
 <span>📅 <b>Data da Importação:</b> {data_importacao}</span>
 </div>
 """, unsafe_allow_html=True)
-            with open(doc["caminho"], "rb") as f:
-                st.download_button("⬇️ Baixar", f, file_name=doc["nome"], key=f"download_{doc['id']}")
+            if os.path.exists(doc["caminho"]):
+                try:
+                    with open(doc["caminho"], "rb") as f:
+                        st.download_button("⬇️ Baixar", f, file_name=doc["nome"], key=f"download_{doc['id']}")
+                except Exception as e:
+                    st.warning(f"Erro ao abrir o arquivo para download: {e}")
+            else:
+                st.warning("Arquivo não encontrado no servidor para download.")
             if st.button(f"🗑️ Excluir documento {doc['id']}", key=f"del_{doc['id']}"):
                 if st.session_state.get(f"confirm_del_{doc['id']}") != True:
                     st.warning("Tem certeza que deseja excluir este documento?")
@@ -290,6 +296,3 @@ def exibir():
                         st.session_state[f"confirm_del_{doc['id']}"] = False
                     except Exception as e:
                         st.error(f"Erro ao excluir: {e}")
-
-
-

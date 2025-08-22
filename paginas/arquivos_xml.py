@@ -351,8 +351,8 @@ def exibir():
     else:
         st.info("Nenhum arquivo XML encontrado.")
 
-    # NOVA SEÇÃO: Visualizar arquivos XML enviados via API
-    st.subheader("📑 XMLs enviados via API")
+    # NOVA SEÇÃO: Visualizar arquivos XML enviados pela Contabilina
+    st.subheader("📑 XMLs enviados pela Contabilina")
     xmls_base = Path("xmls")
     if not xmls_base.exists():
         st.info("Nenhum XML enviado ainda.")
@@ -380,3 +380,65 @@ def exibir():
                         st.download_button("⬇️ Baixar XML", f, file_name=xml.name, key=f"download_xml_{xml}")
                 except Exception as e:
                     st.warning(f"Erro ao abrir o arquivo para download: {e}")
+
+    # NOVA SEÇÃO: Visualização bonita e filtrável dos arquivos do Google Drive
+    st.subheader("☁️ Arquivos XML no Google Drive (visualização moderna)")
+    import pandas as pd
+    from googleapiclient.discovery import build
+    from google.oauth2 import service_account
+    import datetime
+
+    # Caminho para o arquivo de credenciais do serviço Google
+    SERVICE_ACCOUNT_FILE = 'credenciais.json'
+    SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
+    FOLDER_ID = st.text_input('ID da pasta do Google Drive para listar arquivos:', value='', help='Cole aqui o ID da pasta do Drive que deseja visualizar')
+    if FOLDER_ID:
+        try:
+            creds = service_account.Credentials.from_service_account_file(
+                SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+            service = build('drive', 'v3', credentials=creds)
+            # Busca arquivos na pasta
+            query = f"'{FOLDER_ID}' in parents and trashed = false"
+            results = service.files().list(q=query,
+                                           pageSize=200,
+                                           fields="files(id, name, mimeType, createdTime, modifiedTime, size)").execute()
+            files = results.get('files', [])
+            if not files:
+                st.info('Nenhum arquivo encontrado na pasta do Google Drive.')
+            else:
+                # Monta DataFrame
+                df = pd.DataFrame(files)
+                if not df.empty:
+                    df['createdTime'] = pd.to_datetime(df['createdTime'])
+                    df['modifiedTime'] = pd.to_datetime(df['modifiedTime'])
+                    df['size'] = df['size'].astype(float) / 1024
+                    df['size'] = df['size'].map(lambda x: f"{x:.1f} KB")
+                    # Filtros
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        filtro_nome = st.text_input('Filtrar por nome do arquivo')
+                    with col2:
+                        filtro_tipo = st.selectbox('Filtrar por tipo', ['Todos'] + sorted(df['mimeType'].unique()))
+                    df_filtrado = df.copy()
+                    if filtro_nome:
+                        df_filtrado = df_filtrado[df_filtrado['name'].str.contains(filtro_nome, case=False, na=False)]
+                    if filtro_tipo != 'Todos':
+                        df_filtrado = df_filtrado[df_filtrado['mimeType'] == filtro_tipo]
+                    # Links de download/visualização
+                    def make_link(row):
+                        url = f"https://drive.google.com/file/d/{row['id']}/view"
+                        return f"[🔗 Visualizar]({url})"
+                    df_filtrado['Ação'] = df_filtrado.apply(make_link, axis=1)
+                    # Exibe tabela
+                    st.dataframe(df_filtrado[['name', 'mimeType', 'size', 'createdTime', 'modifiedTime', 'Ação']]
+                                 .rename(columns={
+                                     'name': 'Nome',
+                                     'mimeType': 'Tipo',
+                                     'size': 'Tamanho',
+                                     'createdTime': 'Criado em',
+                                     'modifiedTime': 'Modificado em',
+                                 }),
+                                 use_container_width=True,
+                                 hide_index=True)
+        except Exception as e:
+            st.error(f'Erro ao acessar o Google Drive: {e}')

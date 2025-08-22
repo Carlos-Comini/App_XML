@@ -32,8 +32,8 @@ INTERVALO = 30  # segundos entre varreduras
 
 def extrair_info_xml(xml_path):
     # CNPJ e razão social fixos do cliente
-    CNPJ_CLIENTE = '13891705000198'
-    RAZAO_CLIENTE = 'GM MOTOS LTDA'
+    CNPJ_CLIENTE = '06220643000127'
+    RAZAO_CLIENTE = 'ALENCAR CONTABILIDADE LTDA'
     razao_social = 'Desconhecida'
     tipo_nota = 'Desconhecida'
     tipo_doc = 'Desconhecida'
@@ -111,22 +111,26 @@ def extrair_info_xml(xml_path):
         logging.error(f"[ERRO] Falha ao extrair informações do XML: {e}")
         return 'Desconhecida', 'Desconhecida', 'Desconhecida', datetime.now().strftime('%Y'), datetime.now().strftime('%m')
 
-def mover_para_google_drive_local(file_path, razao_social, tipo_nota, tipo_doc, ano, mes):
-    destino = PASTA_GOOGLE_DRIVE / razao_social / tipo_nota / tipo_doc / ano / mes
-    destino.mkdir(parents=True, exist_ok=True)
-    destino_arquivo = destino / Path(file_path).name
-    logging.info(f"Copiando {file_path} para {destino_arquivo}")
+def mover_para_google_drive(file_path, razao_social, tipo_nota, tipo_doc, ano, mes):
+    """
+    Envia o arquivo para o Google Drive na estrutura correta e move o original para 'Enviados'.
+    """
     try:
-        shutil.copy2(file_path, destino_arquivo)
-        logging.info(f"Arquivo copiado com sucesso!")
-        # Agora move o original para a subpasta 'Enviados'
+        from funcoes_compartilhadas.google_drive import enviar_com_subpastas
+        # ID da pasta raiz do Drive (ajuste conforme seu ambiente)
+        PASTA_RAIZ_ID = 'COLOQUE_AQUI_O_ID_DA_PASTA_RAIZ_DO_DRIVE'
+        lista_subpastas = [razao_social, tipo_nota, tipo_doc, ano, mes]
+        logging.info(f"Enviando {file_path} para o Google Drive: {lista_subpastas}")
+        link_drive = enviar_com_subpastas(str(file_path), Path(file_path).name, PASTA_RAIZ_ID, lista_subpastas)
+        logging.info(f"Arquivo enviado para o Drive! Link: {link_drive}")
+        # Move o original para a subpasta 'Enviados'
         enviados_dir = PASTA_LOCAL / 'Enviados'
         enviados_dir.mkdir(exist_ok=True)
         destino_enviado = enviados_dir / Path(file_path).name
         shutil.move(file_path, destino_enviado)
         logging.info(f"Arquivo original movido para {destino_enviado}")
     except Exception as e:
-        logging.error(f"Erro ao copiar/mover arquivo: {e}")
+        logging.error(f"Erro ao enviar/mover arquivo: {e}")
 
 def monitorar_xmls(stop_event):
     logging.info('[MONITOR] Monitorando a pasta por novos XMLs...')
@@ -141,10 +145,10 @@ def monitorar_xmls(stop_event):
             razao, tipo_nota, tipo_doc, ano, mes = extrair_info_xml(xml)
             logging.info(f'[MONITOR] Extraído: Razão Social={razao}, Tipo={tipo_nota}, Doc={tipo_doc}, Ano={ano}, Mês={mes}')
             try:
-                mover_para_google_drive_local(str(xml), razao, tipo_nota, tipo_doc, ano, mes)
-                logging.info(f'[MONITOR] Movido para Google Drive local: {xml.name} -> {razao}/{tipo_nota}/{tipo_doc}/{ano}/{mes}')
+                mover_para_google_drive(str(xml), razao, tipo_nota, tipo_doc, ano, mes)
+                logging.info(f'[MONITOR] Enviado para Google Drive: {xml.name} -> {razao}/{tipo_nota}/{tipo_doc}/{ano}/{mes}')
             except Exception as e:
-                logging.error(f'[ERRO] Falha ao mover {xml.name} para Google Drive local: {e}')
+                logging.error(f'[ERRO] Falha ao enviar {xml.name} para Google Drive: {e}')
         time.sleep(INTERVALO)
 
 def on_exit(icon, item, stop_event):

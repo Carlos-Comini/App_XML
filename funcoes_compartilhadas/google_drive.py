@@ -2,18 +2,46 @@
 # /funcoes_compartilhadas/google_drive.py
 from pydrive2.auth import GoogleAuth
 from pydrive2.drive import GoogleDrive
-import os
+import io
+import json
+from pydrive2.auth import GoogleAuth
+from pydrive2.drive import GoogleDrive
+import tempfile
 
-CAMINHO_CREDENCIAIS = os.path.join("credenciais", "drive.json")
+# Cole o conteúdo do seu credenciais.json aqui como string (apenas o JSON, sem código extra)
+CREDENCIAIS_JSON = """
+{
+  "type": "service_account",
+  "project_id": "SUA_PROJECT_ID",
+  "private_key_id": "SUA_PRIVATE_KEY_ID",
+  "private_key": "-----BEGIN PRIVATE KEY-----\\nSUA_CHAVE_AQUI\\n-----END PRIVATE KEY-----\\n",
+  "client_email": "SUA_EMAIL@SUA_PROJECT_ID.iam.gserviceaccount.com",
+  "client_id": "SUA_CLIENT_ID",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/SUA_EMAIL@SUA_PROJECT_ID.iam.gserviceaccount.com"
+}
+"""
 
 def autenticar_drive():
-    """Autentica no Google Drive usando conta de serviço"""
+    """
+    Autentica no Google Drive usando credenciais embutidas.
+    """
+    with tempfile.NamedTemporaryFile('w+', delete=False, suffix='.json') as tmp:
+        tmp.write(CREDENCIAIS_JSON)
+        tmp.flush()
+        caminho_cred = tmp.name
     gauth = GoogleAuth()
-    gauth.ServiceAuth(CAMINHO_CREDENCIAIS)
+    gauth.ServiceAuth(caminho_cred)
     return GoogleDrive(gauth)
 
 def buscar_ou_criar_pasta(nome_pasta, pasta_pai_id=None):
-    """Busca pasta pelo nome, cria se não existir, e retorna o ID"""
+    """
+    Busca uma pasta pelo nome e ID da pasta pai.
+    Se não encontrar, cria uma nova pasta com o nome na pasta pai especificada.
+    Retorna o ID da pasta encontrada ou criada.
+    """
     drive = autenticar_drive()
     query = f"title = '{nome_pasta}' and mimeType = 'application/vnd.google-apps.folder'"
     if pasta_pai_id:

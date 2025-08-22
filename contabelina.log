@@ -1,0 +1,49 @@
+2025-08-22 15:15:17,233 [INFO] [INICIO] Serviço Contabelina iniciado!
+2025-08-22 15:15:17,234 [INFO] [MONITOR] Monitorando a pasta por novos XMLs...
+2025-08-22 15:15:17,234 [INFO] [INICIO] Carregando ícone: c:\Users\carlos.santos\Desktop\App_XML\imagens\CONTABELINA.ico
+2025-08-22 15:15:17,234 [INFO] [MONITOR] Pasta monitorada: C:\Users\carlos.santos\Desktop\App_XML
+2025-08-22 15:15:17,236 [INFO] [MONITOR] Arquivos XML encontrados: ['448221.xml']
+2025-08-22 15:15:17,236 [INFO] [MONITOR] Processando 448221.xml...
+2025-08-22 15:15:17,236 [INFO] Lendo XML: C:\Users\carlos.santos\Desktop\App_XML\448221.xml
+2025-08-22 15:15:17,239 [INFO] NF-e: cnpj_emit=01426365000145, cnpj_dest=06220643000127, data_emissao=2025-02-11T14:38:54-04:00
+2025-08-22 15:15:17,239 [INFO] Extraído: razao_social=ALENCAR CONTABILIDADE LTDA, tipo_nota=Entrada, tipo_doc=NF-e, ano=2025, mes=02
+2025-08-22 15:15:17,239 [INFO] [MONITOR] Extraído: Razão Social=ALENCAR CONTABILIDADE LTDA, Tipo=Entrada, Doc=NF-e, Ano=2025, Mês=02
+2025-08-22 15:15:18,456 [INFO] Enviando C:\Users\carlos.santos\Desktop\App_XML\448221.xml para o Google Drive: ['ALENCAR CONTABILIDADE LTDA', 'Entrada', 'NF-e', '2025', '02']
+2025-08-22 15:15:18,460 [ERROR] Erro ao enviar/mover arquivo: GoogleAuth.ServiceAuth() takes 1 positional argument but 2 were given
+2025-08-22 15:15:18,460 [INFO] [MONITOR] Enviado para Google Drive: 448221.xml -> ALENCAR CONTABILIDADE LTDA/Entrada/NF-e/2025/02
+2025-08-22 15:15:48,461 [INFO] [MONITOR] Arquivos XML encontrados: ['448221.xml']
+2025-08-22 15:15:48,461 [INFO] [MONITOR] Processando 448221.xml...
+2025-08-22 15:15:48,461 [INFO] Lendo XML: C:\Users\carlos.santos\Desktop\App_XML\448221.xml
+2025-08-22 15:15:48,462 [INFO] NF-e: cnpj_emit=01426365000145, cnpj_dest=06220643000127, data_emissao=2025-02-11T14:38:54-04:00
+2025-08-22 15:15:48,462 [INFO] Extraído: razao_social=ALENCAR CONTABILIDADE LTDA, tipo_nota=Entrada, tipo_doc=NF-e, ano=2025, mes=02
+2025-08-22 15:15:48,462 [INFO] [MONITOR] Extraído: Razão Social=ALENCAR CONTABILIDADE LTDA, Tipo=Entrada, Doc=NF-e, Ano=2025, Mês=02
+2025-08-22 15:15:48,462 [INFO] Enviando C:\Users\carlos.santos\Desktop\App_XML\448221.xml para o Google Drive: ['ALENCAR CONTABILIDADE LTDA', 'Entrada', 'NF-e', '2025', '02']
+2025-08-22 15:15:48,463 [ERROR] Erro ao enviar/mover arquivo: GoogleAuth.ServiceAuth() takes 1 positional argument but 2 were given
+2025-08-22 15:15:48,463 [INFO] [MONITOR] Enviado para Google Drive: 448221.xml -> ALENCAR CONTABILIDADE LTDA/Entrada/NF-e/2025/02
+2025-08-22 15:16:18,464 [INFO] [MONITOR] Arquivos XML encontrados: ['448221.xml']
+2025-08-22 15:16:18,464 [INFO] [MONITOR] Processando 448221.xml...
+2025-08-22 15:16:18,465 [INFO] Lendo XML: C:\Users\carlos.santos\Desktop\App_XML\448221.xml
+2025-08-22 15:16:18,466 [INFO] NF-e: cnpj_emit=01426365000145, cnpj_dest=06220643000127, data_emissao=2025-02-11T14:38:54-04:00
+2025-08-22 15:16:18,466 [INFO] Extraído: razao_social=ALENCAR CONTABILIDADE LTDA, tipo_nota=Entrada, tipo_doc=NF-e, ano=2025, mes=02
+2025-08-22 15:16:18,467 [INFO] [MONITOR] Extraído: Razão Social=ALENCAR CONTABILIDADE LTDA, Tipo=Entrada, Doc=NF-e, Ano=2025, Mês=02
+2025-08-22 15:16:18,467 [INFO] Enviando C:\Users\carlos.santos\Desktop\App_XML\448221.xml para o Google Drive: ['ALENCAR CONTABILIDADE LTDA', 'Entrada', 'NF-e', '2025', '02']
+2025-08-22 15:16:18,469 [ERROR] Erro ao enviar/mover arquivo: GoogleAuth.ServiceAuth() takes 1 positional argument but 2 were given
+2025-08-22 15:16:18,469 [INFO] [MONITOR] Enviado para Google Drive: 448221.xml -> ALENCAR CONTABILIDADE LTDA/Entrada/NF-e/2025/02
+2025-08-22 15:16:48,469 [INFO] [MONITOR] Arquivos XML encontrados: ['448221.xml']
+2025-08-22 15:16:48,469 [INFO] [MONITOR] Processando 448221.xml...
+2025-08-22 15:16:48,469 [INFO] Lendo XML: C:\Users\carlos.santos\Desktop\App_XML\448221.xml
+2025-08-22 15:16:48,470 [INFO] NF-e: cnpj_emit=01426365000145, cnpj_dest=06220643000127, data_emissao=2025-02-11T14:38:54-04:00
+2025-08-22 15:16:48,470 [INFO] Extraído: razao_social=ALENCAR CONTABILIDADE LTDA, tipo_nota=Entrada, tipo_doc=NF-e, ano=2025, mes=02
+2025-08-22 15:16:48,470 [INFO] [MONITOR] Extraído: Razão Social=ALENCAR CONTABILIDADE LTDA, Tipo=Entrada, Doc=NF-e, Ano=2025, Mês=02
+2025-08-22 15:16:48,470 [INFO] Enviando C:\Users\carlos.santos\Desktop\App_XML\448221.xml para o Google Drive: ['ALENCAR CONTABILIDADE LTDA', 'Entrada', 'NF-e', '2025', '02']
+2025-08-22 15:16:48,471 [ERROR] Erro ao enviar/mover arquivo: GoogleAuth.ServiceAuth() takes 1 positional argument but 2 were given
+2025-08-22 15:16:48,471 [INFO] [MONITOR] Enviado para Google Drive: 448221.xml -> ALENCAR CONTABILIDADE LTDA/Entrada/NF-e/2025/02
+2025-08-22 15:17:18,472 [INFO] [MONITOR] Arquivos XML encontrados: ['448221.xml']
+2025-08-22 15:17:18,472 [INFO] [MONITOR] Processando 448221.xml...
+2025-08-22 15:17:18,472 [INFO] Lendo XML: C:\Users\carlos.santos\Desktop\App_XML\448221.xml
+2025-08-22 15:17:18,473 [INFO] NF-e: cnpj_emit=01426365000145, cnpj_dest=06220643000127, data_emissao=2025-02-11T14:38:54-04:00
+2025-08-22 15:17:18,473 [INFO] Extraído: razao_social=ALENCAR CONTABILIDADE LTDA, tipo_nota=Entrada, tipo_doc=NF-e, ano=2025, mes=02
+2025-08-22 15:17:18,473 [INFO] [MONITOR] Extraído: Razão Social=ALENCAR CONTABILIDADE LTDA, Tipo=Entrada, Doc=NF-e, Ano=2025, Mês=02
+2025-08-22 15:17:18,473 [INFO] Enviando C:\Users\carlos.santos\Desktop\App_XML\448221.xml para o Google Drive: ['ALENCAR CONTABILIDADE LTDA', 'Entrada', 'NF-e', '2025', '02']
+2025-08-22 15:17:18,474 [ERROR] Erro ao enviar/mover arquivo: GoogleAuth.ServiceAuth() takes 1 positional argument but 2 were given
+2025-08-22 15:17:18,474 [INFO] [MONITOR] Enviado para Google Drive: 448221.xml -> ALENCAR CONTABILIDADE LTDA/Entrada/NF-e/2025/02

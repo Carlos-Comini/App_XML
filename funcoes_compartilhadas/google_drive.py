@@ -28,12 +28,13 @@ def autenticar_drive():
     """
     Autentica no Google Drive usando credenciais embutidas.
     """
+    import tempfile
+    gauth = GoogleAuth()
     with tempfile.NamedTemporaryFile('w+', delete=False, suffix='.json') as tmp:
         tmp.write(CREDENCIAIS_JSON)
         tmp.flush()
-        caminho_cred = tmp.name
-    gauth = GoogleAuth()
-    gauth.ServiceAuth(caminho_cred)
+        gauth.client_json_file_path = tmp.name
+        gauth.ServiceAuth()
     return GoogleDrive(gauth)
 
 def buscar_ou_criar_pasta(nome_pasta, pasta_pai_id=None):
